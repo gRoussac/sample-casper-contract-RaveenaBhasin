@@ -1,3 +1,6 @@
+#![no_std]
+#![no_main]
+
 use crate::constants::{self, MSG_PREFIX};
 use crate::constants::{Bytes, Bytes20, ValsetArgs};
 extern crate alloc;
@@ -6,9 +9,7 @@ use alloc::{format, string::String, vec::Vec};
 use casper_contract::contract_api::runtime;
 use casper_types::{CLValue, U128};
 // use k256::ecdsa::recoverable::Signature as RecoverableSignature;
-use libsecp256k1::{recover, Signature};
-use libsecp256k1::{Message, RecoveryId};
-//use secp256k1::{Message, Secp256k1, SecretKey};
+use libsecp256k1::{recover, Message, RecoveryId, Signature};
 
 // use secp256k1::Secp256k1;
 // use secp256k1::{
@@ -33,7 +34,7 @@ pub fn make_digest(data: &Vec<u8>) -> Vec<u8> {
     checkpoint.into()
 }
 
-#[no_mangle]
+//  #[no_mangle] // this will pack metadata of ecdsa_recover
 pub fn verify_sig() {
     let signer: Bytes20 = runtime::get_named_arg("signer");
     let message_digest: Vec<u8> = runtime::get_named_arg("message_digest");
