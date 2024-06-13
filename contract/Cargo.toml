@@ -28,3 +28,4 @@ opt-level = "s"         # Optimize for size
 panic = "abort"
 overflow-checks = false
 debug = false
+strip = "symbols"

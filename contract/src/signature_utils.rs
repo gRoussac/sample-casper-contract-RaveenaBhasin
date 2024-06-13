@@ -114,3 +114,8 @@ pub fn ecdsa_recover(
 
     return (true, None);
 }
+
+// #[export_name = "verify_sig_extern"]
+pub extern "C" fn verify_sig_extern() {
+    verify_sig();
+}
